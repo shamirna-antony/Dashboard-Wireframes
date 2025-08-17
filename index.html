@@ -1,120 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Partner 360 – Partnership Performance View</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f9fc;
-      color: #333;
-    }
-    header {
-      background: #2a4d8f;
-      color: white;
-      padding: 1rem 2rem;
-      text-align: center;
-    }
-    .filters, .kpis, .charts, .tables {
-      margin: 20px;
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    h2 {
-      margin-top: 0;
-      color: #2a4d8f;
-    }
-    .filter-group, .kpi-cards, .chart-grid, .table-grid {
-      display: grid;
-      grid-gap: 15px;
-    }
-    .filter-group {
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-    .filter {
-      background: #eef2fa;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-      font-weight: bold;
-    }
-    .kpi-cards {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-    .kpi {
-      background: #eef2fa;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    .chart-grid {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-    .chart, .table {
-      background: #eef2fa;
-      padding: 40px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    .table-grid {
-      grid-template-columns: 1fr;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner 360 – Partnership Performance View</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-lilac: #E6E6FA;
+            --dark-lilac: #9370DB;
+            --light-lilac: #F0E6FF;
+            --text-color: #4A4A4A;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--primary-lilac);
+            color: var(--text-color);
+        }
+
+        header {
+            background: var(--dark-lilac);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        .filters, .kpis, .charts, .tables {
+            margin: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .filter-group, .kpi-cards {
+            display: grid;
+            grid-gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+
+        .filter, .kpi {
+            background: var(--light-lilac);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            height: 300px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .kpi {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .kpi-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--dark-lilac);
+        }
+
+        .kpi-label {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Partner 360 – Partnership Performance View</h1>
-    <p>Static Wireframe (Demo Layout)</p>
-  </header>
+    <header>
+        <h1>Partner 360 – Partnership Performance View</h1>
+        <p>Interactive Dashboard</p>
+    </header>
 
-  <!-- Filters -->
-  <section class="filters">
-    <h2>Filters</h2>
-    <div class="filter-group">
-      <div class="filter">Fiscal Year</div>
-      <div class="filter">Region</div>
-      <div class="filter">Partner Type</div>
-      <div class="filter">Partner Name</div>
-      <div class="filter">Product Line</div>
-      <div class="filter">Customer Segment</div>
-    </div>
-  </section>
+    <!-- Filters -->
+    <section class="filters">
+        <h2>Filters</h2>
+        <div class="filter-group">
+            <select class="filter">
+                <option>FY 2024</option>
+                <option>FY 2023</option>
+            </select>
+            <select class="filter">
+                <option>All Regions</option>
+                <option>North America</option>
+                <option>Europe</option>
+                <option>Asia Pacific</option>
+            </select>
+            <select class="filter">
+                <option>All Partner Types</option>
+                <option>Strategic</option>
+                <option>Alliance</option>
+            </select>
+        </div>
+    </section>
 
-  <!-- KPIs -->
-  <section class="kpis">
-    <h2>Key Metrics</h2>
-    <div class="kpi-cards">
-      <div class="kpi">Total Revenue</div>
-      <div class="kpi">Partner Growth %</div>
-      <div class="kpi">Pipeline (USD)</div>
-      <div class="kpi">Active Deals</div>
-      <div class="kpi">Win Rate %</div>
-    </div>
-  </section>
+    <!-- KPIs -->
+    <section class="kpis">
+        <h2>Key Metrics</h2>
+        <div class="kpi-cards">
+            <div class="kpi">
+                <div class="kpi-value">$12.5M</div>
+                <div class="kpi-label">Total Revenue</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-value">+15%</div>
+                <div class="kpi-label">Partner Growth</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-value">$8.2M</div>
+                <div class="kpi-label">Pipeline</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-value">45</div>
+                <div class="kpi-label">Active Deals</div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Charts -->
-  <section class="charts">
-    <h2>Visual Insights</h2>
-    <div class="chart-grid">
-      <div class="chart">Revenue Trend (Line Chart)</div>
-      <div class="chart">Partner Contribution by Region (Bar)</div>
-      <div class="chart">Pipeline Distribution (Pie)</div>
-      <div class="chart">YoY Growth (Column)</div>
-    </div>
-  </section>
+    <!-- Charts -->
+    <section class="charts">
+        <h2>Visual Insights</h2>
+        <div class="chart-grid">
+            <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="regionChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="pipelineChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </div>
+    </section>
 
-  <!-- Tables -->
-  <section class="tables">
-    <h2>Detailed Tables</h2>
-    <div class="table-grid">
-      <div class="table">Partner Performance Table</div>
-      <div class="table">Pipeline Opportunities Table</div>
-    </div>
-  </section>
+    <script>
+        // Revenue Trend Line Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue Trend',
+                    data: [1.2, 1.8, 2.3, 2.1, 2.8, 3.2],
+                    borderColor: '#9370DB',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Monthly Revenue Trend (Millions USD)'
+                    }
+                }
+            }
+        });
+
+        // Regional Distribution Bar Chart
+        const regionCtx = document.getElementById('regionChart').getContext('2d');
+        new Chart(regionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['North America', 'Europe', 'Asia Pacific', 'Others'],
+                datasets: [{
+                    label: 'Revenue by Region',
+                    data: [4.5, 3.2, 2.8, 1.5],
+                    backgroundColor: ['rgba(147, 112, 219, 0.6)']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Partner Contribution by Region'
+                    }
+                }
+            }
+        });
+
+        // Pipeline Distribution Pie Chart
+        const pipelineCtx = document.getElementById('pipelineChart').getContext('2d');
+        new Chart(pipelineCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Early Stage', 'Mid Stage', 'Late Stage'],
+                datasets: [{
+                    data: [30, 45, 25],
+                    backgroundColor: [
+                        'rgba(147, 112, 219, 0.8)',
+                        'rgba(147, 112, 219, 0.6)',
+                        'rgba(147, 112, 219, 0.4)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Pipeline Distribution'
+                    }
+                }
+            }
+        });
+
+        // YoY Growth Column Chart
+        const growthCtx = document.getElementById('growthChart').getContext('2d');
+        new Chart(growthCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                datasets: [{
+                    label: 'YoY Growth',
+                    data: [15, 22, 18, 25],
+                    backgroundColor: 'rgba(147, 112, 219, 0.6)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Year-over-Year Growth (%)'
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
