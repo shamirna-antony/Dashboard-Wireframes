@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner 360 – Partnership Performance View</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f9fc;
+      color: #333;
+    }
+    header {
+      background: #2a4d8f;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    .filters, .kpis, .charts, .tables {
+      margin: 20px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 0;
+      color: #2a4d8f;
+    }
+    .filter-group, .kpi-cards, .chart-grid, .table-grid {
+      display: grid;
+      grid-gap: 15px;
+    }
+    .filter-group {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .filter {
+      background: #eef2fa;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .kpi-cards {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .kpi {
+      background: #eef2fa;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .chart-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    .chart, .table {
+      background: #eef2fa;
+      padding: 40px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .table-grid {
+      grid-template-columns: 1fr;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Partner 360 – Partnership Performance View</h1>
+    <p>Static Wireframe (Demo Layout)</p>
+  </header>
+
+  <!-- Filters -->
+  <section class="filters">
+    <h2>Filters</h2>
+    <div class="filter-group">
+      <div class="filter">Fiscal Year</div>
+      <div class="filter">Region</div>
+      <div class="filter">Partner Type</div>
+      <div class="filter">Partner Name</div>
+      <div class="filter">Product Line</div>
+      <div class="filter">Customer Segment</div>
+    </div>
+  </section>
+
+  <!-- KPIs -->
+  <section class="kpis">
+    <h2>Key Metrics</h2>
+    <div class="kpi-cards">
+      <div class="kpi">Total Revenue</div>
+      <div class="kpi">Partner Growth %</div>
+      <div class="kpi">Pipeline (USD)</div>
+      <div class="kpi">Active Deals</div>
+      <div class="kpi">Win Rate %</div>
+    </div>
+  </section>
+
+  <!-- Charts -->
+  <section class="charts">
+    <h2>Visual Insights</h2>
+    <div class="chart-grid">
+      <div class="chart">Revenue Trend (Line Chart)</div>
+      <div class="chart">Partner Contribution by Region (Bar)</div>
+      <div class="chart">Pipeline Distribution (Pie)</div>
+      <div class="chart">YoY Growth (Column)</div>
+    </div>
+  </section>
+
+  <!-- Tables -->
+  <section class="tables">
+    <h2>Detailed Tables</h2>
+    <div class="table-grid">
+      <div class="table">Partner Performance Table</div>
+      <div class="table">Pipeline Opportunities Table</div>
+    </div>
+  </section>
+</body>
+</html>
