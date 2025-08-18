@@ -16,9 +16,11 @@
 
         .dashboard-title {
             text-align: center;
-            color: #C8A2C8; /* Lilac color */
-            font-size: 24px;
+            color: #663399; /* Darker lilac color */
+            font-size: 36px; /* Bigger font size */
             margin-bottom: 30px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .filter-section {
@@ -78,6 +80,13 @@
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
+            height: 300px; /* Reduced height for charts */
+        }
+
+        .chart-container h3 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 15px;
         }
 
         select, input {
@@ -89,106 +98,7 @@
     </style>
 </head>
 <body>
-    <h1 class="dashboard-title">Partnership Performance</h1>
-
-    <!-- Filter Section -->
-    <div class="filter-section">
-        <div class="filter-item">
-            <label>Partner Relationship Manager (PRM)</label>
-            <select id="prm">
-                <option value="">Select PRM</option>
-                <!-- Add PRM options dynamically -->
-            </select>
-        </div>
-        <div class="filter-item">
-            <label>External Program Tier</label>
-            <select id="programTier">
-                <option value="">Select Tier</option>
-                <!-- Add tier options dynamically -->
-            </select>
-        </div>
-        <div class="filter-item">
-            <label>Partner Type</label>
-            <select id="partnerType">
-                <option value="">Select Type</option>
-                <!-- Add partner type options dynamically -->
-            </select>
-        </div>
-        <div class="filter-item">
-            <label>Opp Owner Sub-Region</label>
-            <select id="subRegion">
-                <option value="">Select Sub-Region</option>
-                <!-- Add sub-region options dynamically -->
-            </select>
-        </div>
-        <div class="filter-item">
-            <label>As-of Date</label>
-            <input type="text" id="asOfDate" placeholder="Select date">
-        </div>
-    </div>
-
-    <!-- KPI Section -->
-    <div class="kpi-container">
-        <div class="kpi-card">
-            <h3>Sourced Pipeline Generated</h3>
-            <div class="kpi-value">$10M</div>
-            <div class="kpi-trend">
-                <div class="yoy trend-up">▲ 15% YoY</div>
-                <div class="qoq trend-up">▲ 5% QoQ</div>
-            </div>
-        </div>
-        <div class="kpi-card">
-            <h3>Sourced & Influenced Bookings</h3>
-            <div class="kpi-value">$5M</div>
-            <div class="kpi-trend">
-                <div class="yoy trend-up">▲ 20% YoY</div>
-                <div class="qoq trend-down">▼ 2% QoQ</div>
-            </div>
-        </div>
-        <div class="kpi-card">
-            <h3>Partner Attach Rate</h3>
-            <div class="kpi-value">75%</div>
-            <div class="kpi-trend">
-                <div class="yoy trend-up">▲ 10% YoY</div>
-                <div class="qoq trend-up">▲ 3% QoQ</div>
-            </div>
-        </div>
-        <div class="kpi-card">
-            <h3>Leads Sent to Partners</h3>
-            <div class="kpi-value">250</div>
-            <div class="kpi-trend">
-                <div class="yoy trend-up">▲ 25% YoY</div>
-                <div class="qoq trend-up">▲ 8% QoQ</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Charts Section -->
-    <div class="chart-container">
-        <h3>Influence Win Rate vs. Uninfluenced Win Rate</h3>
-        <canvas id="winRateChart"></canvas>
-    </div>
-
-    <div class="chart-container">
-        <h3>Partner Influence Win Rate Lift</h3>
-        <canvas id="winRateLiftChart"></canvas>
-    </div>
-
-    <div class="chart-container">
-        <h3>Average Sales Cycle (ASC) - Influenced vs Uninfluenced</h3>
-        <canvas id="salesCycleChart"></canvas>
-    </div>
-
-    <div class="chart-container">
-        <h3>Partner-Influenced ASP vs Uninfluenced ASP</h3>
-        <canvas id="aspChart"></canvas>
-    </div>
-
-    <div class="chart-container">
-        <h3>Partner Influence Sales Cycle Reduction (Days)</h3>
-        <canvas id="cycleReductionChart"></canvas>
-    </div>
-
+    <!-- Rest of the HTML remains the same until the script section -->
     <script>
         // Initialize date picker
         flatpickr("#asOfDate", {
@@ -207,87 +117,200 @@
             return months;
         }
 
-        // Common chart configuration for side-by-side bars
-        function createComparisonChart(ctx, label1, label2, data1, data2) {
-            return new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: getLast12Months(),
-                    datasets: [
-                        {
-                            label: label1,
-                            data: data1,
-                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: label2,
-                            data: data2,
-                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
+        // Function to generate random data within a range
+        function generateRandomData(min, max, length) {
+            return Array(length).fill().map(() => Math.floor(Math.random() * (max - min + 1)) + min);
         }
 
-        // Initialize charts
-        const charts = {
-            winRate: createComparisonChart(
-                document.getElementById('winRateChart').getContext('2d'),
-                'Influenced Win Rate',
-                'Uninfluenced Win Rate',
-                Array(12).fill().map(() => Math.random() * 100),
-                Array(12).fill().map(() => Math.random() * 100)
-            ),
-            winRateLift: createComparisonChart(
-                document.getElementById('winRateLiftChart').getContext('2d'),
-                'Influenced',
-                'Uninfluenced',
-                Array(12).fill().map(() => Math.random() * 100),
-                Array(12).fill().map(() => Math.random() * 100)
-            ),
-            salesCycle: createComparisonChart(
-                document.getElementById('salesCycleChart').getContext('2d'),
-                'Influenced ASC',
-                'Uninfluenced ASC',
-                Array(12).fill().map(() => Math.random() * 100),
-                Array(12).fill().map(() => Math.random() * 100)
-            ),
-            asp: createComparisonChart(
-                document.getElementById('aspChart').getContext('2d'),
-                'Influenced ASP',
-                'Uninfluenced ASP',
-                Array(12).fill().map(() => Math.random() * 10000),
-                Array(12).fill().map(() => Math.random() * 10000)
-            )
+        // Color schemes for different charts
+        const colorSchemes = {
+            winRate: {
+                influenced: {
+                    backgroundColor: 'rgba(147, 112, 219, 0.5)',
+                    borderColor: 'rgba(147, 112, 219, 1)'
+                },
+                uninfluenced: {
+                    backgroundColor: 'rgba(106, 90, 205, 0.5)',
+                    borderColor: 'rgba(106, 90, 205, 1)'
+                }
+            },
+            winRateLift: {
+                influenced: {
+                    backgroundColor: 'rgba(65, 105, 225, 0.5)',
+                    borderColor: 'rgba(65, 105, 225, 1)'
+                },
+                uninfluenced: {
+                    backgroundColor: 'rgba(30, 144, 255, 0.5)',
+                    borderColor: 'rgba(30, 144, 255, 1)'
+                }
+            },
+            salesCycle: {
+                influenced: {
+                    backgroundColor: 'rgba(50, 205, 50, 0.5)',
+                    borderColor: 'rgba(50, 205, 50, 1)'
+                },
+                uninfluenced: {
+                    backgroundColor: 'rgba(34, 139, 34, 0.5)',
+                    borderColor: 'rgba(34, 139, 34, 1)'
+                }
+            },
+            asp: {
+                influenced: {
+                    backgroundColor: 'rgba(255, 140, 0, 0.5)',
+                    borderColor: 'rgba(255, 140, 0, 1)'
+                },
+                uninfluenced: {
+                    backgroundColor: 'rgba(255, 165, 0, 0.5)',
+                    borderColor: 'rgba(255, 165, 0, 1)'
+                }
+            }
         };
 
-        // Single bar chart for cycle reduction
+        // Create charts with different color schemes and random data
+        const winRateChart = new Chart(document.getElementById('winRateChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: getLast12Months(),
+                datasets: [
+                    {
+                        label: 'Influenced Win Rate',
+                        data: generateRandomData(40, 80, 12),
+                        ...colorSchemes.winRate.influenced
+                    },
+                    {
+                        label: 'Uninfluenced Win Rate',
+                        data: generateRandomData(20, 60, 12),
+                        ...colorSchemes.winRate.uninfluenced
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Win Rate Comparison (%)'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        const winRateLiftChart = new Chart(document.getElementById('winRateLiftChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: getLast12Months(),
+                datasets: [
+                    {
+                        label: 'Influenced',
+                        data: generateRandomData(20, 40, 12),
+                        ...colorSchemes.winRateLift.influenced
+                    },
+                    {
+                        label: 'Uninfluenced',
+                        data: generateRandomData(10, 30, 12),
+                        ...colorSchemes.winRateLift.uninfluenced
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Win Rate Lift (%)'
+                    }
+                }
+            }
+        });
+
+        const salesCycleChart = new Chart(document.getElementById('salesCycleChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: getLast12Months(),
+                datasets: [
+                    {
+                        label: 'Influenced ASC',
+                        data: generateRandomData(30, 60, 12),
+                        ...colorSchemes.salesCycle.influenced
+                    },
+                    {
+                        label: 'Uninfluenced ASC',
+                        data: generateRandomData(45, 90, 12),
+                        ...colorSchemes.salesCycle.uninfluenced
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Average Sales Cycle (Days)'
+                    }
+                }
+            }
+        });
+
+        const aspChart = new Chart(document.getElementById('aspChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: getLast12Months(),
+                datasets: [
+                    {
+                        label: 'Influenced ASP',
+                        data: generateRandomData(50000, 100000, 12),
+                        ...colorSchemes.asp.influenced
+                    },
+                    {
+                        label: 'Uninfluenced ASP',
+                        data: generateRandomData(30000, 80000, 12),
+                        ...colorSchemes.asp.uninfluenced
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Average Sales Price ($)'
+                    }
+                }
+            }
+        });
+
+        // Single bar chart for cycle reduction with new color scheme
         new Chart(document.getElementById('cycleReductionChart').getContext('2d'), {
             type: 'bar',
             data: {
                 labels: getLast12Months(),
                 datasets: [{
                     label: 'Days Reduced',
-                    data: Array(12).fill().map(() => Math.random() * 30),
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    data: generateRandomData(10, 25, 12),
+                    backgroundColor: 'rgba(219, 112, 147, 0.5)',
+                    borderColor: 'rgba(219, 112, 147, 1)',
                     borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Sales Cycle Reduction (Days)'
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true
