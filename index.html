@@ -98,7 +98,110 @@
     </style>
 </head>
 <body>
-    <!-- Rest of the HTML remains the same until the script section -->
+    <h1 class="dashboard-title">Partnership Performance</h1>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="filter-item">
+            <label>Partner Relationship Manager (PRM)</label>
+            <select id="prm">
+                <option value="">Select PRM</option>
+                <option value="prm1">PRM 1</option>
+                <option value="prm2">PRM 2</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label>External Program Tier</label>
+            <select id="programTier">
+                <option value="">Select Tier</option>
+                <option value="tier1">Tier 1</option>
+                <option value="tier2">Tier 2</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label>Partner Type</label>
+            <select id="partnerType">
+                <option value="">Select Type</option>
+                <option value="type1">Type 1</option>
+                <option value="type2">Type 2</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label>Opp Owner Sub-Region</label>
+            <select id="subRegion">
+                <option value="">Select Sub-Region</option>
+                <option value="region1">Region 1</option>
+                <option value="region2">Region 2</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label>As-of Date</label>
+            <input type="text" id="asOfDate" placeholder="Select date">
+        </div>
+    </div>
+
+    <!-- KPI Section -->
+    <div class="kpi-container">
+        <div class="kpi-card">
+            <h3>Sourced Pipeline Generated</h3>
+            <div class="kpi-value">$10M</div>
+            <div class="kpi-trend">
+                <div class="yoy trend-up">▲ 15% YoY</div>
+                <div class="qoq trend-up">▲ 5% QoQ</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <h3>Sourced & Influenced Bookings</h3>
+            <div class="kpi-value">$5M</div>
+            <div class="kpi-trend">
+                <div class="yoy trend-up">▲ 20% YoY</div>
+                <div class="qoq trend-down">▼ 2% QoQ</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <h3>Partner Attach Rate</h3>
+            <div class="kpi-value">75%</div>
+            <div class="kpi-trend">
+                <div class="yoy trend-up">▲ 10% YoY</div>
+                <div class="qoq trend-up">▲ 3% QoQ</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <h3>Leads Sent to Partners</h3>
+            <div class="kpi-value">250</div>
+            <div class="kpi-trend">
+                <div class="yoy trend-up">▲ 25% YoY</div>
+                <div class="qoq trend-up">▲ 8% QoQ</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="chart-container">
+        <h3>Influence Win Rate vs. Uninfluenced Win Rate</h3>
+        <canvas id="winRateChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h3>Partner Influence Win Rate Lift</h3>
+        <canvas id="winRateLiftChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h3>Average Sales Cycle (ASC) - Influenced vs Uninfluenced</h3>
+        <canvas id="salesCycleChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h3>Partner-Influenced ASP vs Uninfluenced ASP</h3>
+        <canvas id="aspChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h3>Partner Influence Sales Cycle Reduction (Days)</h3>
+        <canvas id="cycleReductionChart"></canvas>
+    </div>
+
     <script>
         // Initialize date picker
         flatpickr("#asOfDate", {
