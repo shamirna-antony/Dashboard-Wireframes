@@ -124,7 +124,7 @@
             background: #faf6ff;
             padding: 20px;
             border-radius: 8px;
-            height: 300px;
+            height: 350px;
             border: 2px solid #e6d4ff;
             box-shadow: 0 2px 4px rgba(102, 51, 153, 0.1);
         }
@@ -166,9 +166,10 @@
 
         .bar-chart-container {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: 200px;
+            justify-content: center;
+            align-items: flex-end;
+            height: 250px;
+            gap: 60px;
         }
 
         .bar-item {
@@ -176,11 +177,12 @@
         }
 
         .bar {
-            width: 80px;
+            width: 120px;
             background: #9b7bb5;
             margin: 0 auto;
             border-radius: 4px;
             position: relative;
+            transition: all 0.3s ease;
         }
 
         .bar-label {
@@ -216,7 +218,7 @@
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
-            height: 300px;
+            height: 350px;
             border: 2px solid #e6d4ff;
             box-shadow: 0 2px 4px rgba(102, 51, 153, 0.1);
         }
@@ -314,13 +316,13 @@
             <h3>Influence Win Rate vs. Uninfluenced Win Rate (YTD)</h3>
             <div class="bar-chart-container">
                 <div class="bar-item">
-                    <div class="bar" style="height: 120px; background: #75c0c0;">
+                    <div class="bar" style="height: 180px; background: #75c0c0;">
                         <div class="bar-value">65%</div>
                     </div>
                     <div class="bar-label">Influenced</div>
                 </div>
                 <div class="bar-item">
-                    <div class="bar" style="height: 80px; background: #ff6384;">
+                    <div class="bar" style="height: 111px; background: #ff6384;">
                         <div class="bar-value">40%</div>
                     </div>
                     <div class="bar-label">Uninfluenced</div>
@@ -340,13 +342,13 @@
             <h3>Average Sales Cycle (ASC) - Influenced vs Uninfluenced (YTD)</h3>
             <div class="bar-chart-container">
                 <div class="bar-item">
-                    <div class="bar" style="height: 90px; background: #36a2eb;">
+                    <div class="bar" style="height: 150px; background: #36a2eb;">
                         <div class="bar-value">45</div>
                     </div>
                     <div class="bar-label">Influenced</div>
                 </div>
                 <div class="bar-item">
-                    <div class="bar" style="height: 135px; background: #ff9f40;">
+                    <div class="bar" style="height: 223px; background: #ff9f40;">
                         <div class="bar-value">67</div>
                     </div>
                     <div class="bar-label">Uninfluenced</div>
@@ -354,28 +356,35 @@
             </div>
         </div>
         <div class="metric-card">
-            <h3>Partner Influence Sales Cycle Reduction</h3>
+            <h3>Partner Influence Sales Cycle Acceleration</h3>
             <div class="metric-value">22</div>
-            <div class="metric-description">Days reduced</div>
+            <div class="metric-description">Days accelerated</div>
         </div>
     </div>
 
-    <!-- ASP Chart -->
-    <div class="standalone-chart">
-        <h3>Partner-Influenced ASP vs Uninfluenced ASP (YTD)</h3>
-        <div class="bar-chart-container">
-            <div class="bar-item">
-                <div class="bar" style="height: 140px; background: #2ecc71;">
-                    <div class="bar-value">$85K</div>
+    <!-- ASP Section -->
+    <div class="metrics-row">
+        <div class="chart-container">
+            <h3>Partner-Influenced ASP vs Uninfluenced ASP (YTD)</h3>
+            <div class="bar-chart-container">
+                <div class="bar-item">
+                    <div class="bar" style="height: 200px; background: #2ecc71;">
+                        <div class="bar-value">$85K</div>
+                    </div>
+                    <div class="bar-label">Influenced</div>
                 </div>
-                <div class="bar-label">Influenced</div>
-            </div>
-            <div class="bar-item">
-                <div class="bar" style="height: 100px; background: #e74c3c;">
-                    <div class="bar-value">$60K</div>
+                <div class="bar-item">
+                    <div class="bar" style="height: 141px; background: #e74c3c;">
+                        <div class="bar-value">$60K</div>
+                    </div>
+                    <div class="bar-label">Uninfluenced</div>
                 </div>
-                <div class="bar-label">Uninfluenced</div>
             </div>
+        </div>
+        <div class="metric-card">
+            <h3>Partner Influence ASP Uplift</h3>
+            <div class="metric-value">41.7%</div>
+            <div class="metric-description">Higher average deal size</div>
         </div>
     </div>
 
